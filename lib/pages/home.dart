@@ -46,14 +46,7 @@ class _HomePageState extends State<HomePage> {
                 Text(
                   "顶级推荐房源",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-                Text(
-                  "查看全部",
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.darker),
-                ),
+                )
               ],
             ),
           ),
@@ -72,13 +65,6 @@ class _HomePageState extends State<HomePage> {
                 Text(
                   "最新房源",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-                Text(
-                  "查看全部",
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.darker),
                 ),
               ],
             ),

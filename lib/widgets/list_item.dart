@@ -29,7 +29,7 @@ class RecentItem extends StatelessWidget {
         children: [
           CustomImage(
             data["imageURL"],
-            height: 140, // Adjust height as needed
+            height: 190, // Adjust height as needed
             width: 150, // Adjust width as needed
             borderRadiusOnly: BorderRadius.only(
               topLeft: Radius.circular(5),
@@ -83,9 +83,59 @@ class RecentItem extends StatelessWidget {
           const SizedBox(
             height: 3,
           ),
-          Text(
-            "${data["area"]} | ${data["bedrooms"]} | ${data["bathrooms"]}",
-            style: TextStyle(fontSize: 12, color: AppColor.darker),
+          Row(
+            children: [
+              Icon(
+                Icons.square_foot,
+                size: 13,
+                color: AppColor.darker,
+              ),
+              const SizedBox(
+                width: 3,
+              ),
+              Text(
+                "${data["area"]}",
+                style: TextStyle(fontSize: 12, color: AppColor.darker),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 3,
+          ),
+          Row(
+            children: [
+              Icon(
+                Icons.bed,
+                size: 13,
+                color: AppColor.darker,
+              ),
+              const SizedBox(
+                width: 3,
+              ),
+              Text(
+                "${data["bedrooms"]} 卧室",
+                style: TextStyle(fontSize: 12, color: AppColor.darker),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 3,
+          ),
+          Row(
+            children: [
+              Icon(
+                Icons.bathtub,
+                size: 13,
+                color: AppColor.darker,
+              ),
+              const SizedBox(
+                width: 3,
+              ),
+              Text(
+                "${data["bathrooms"]} 卫生间",
+                style: TextStyle(fontSize: 12, color: AppColor.darker),
+              ),
+            ],
           ),
           const SizedBox(
             height: 5,
