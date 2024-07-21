@@ -14,7 +14,7 @@ class RecommendItem extends StatelessWidget {
       height: 130,
       margin: EdgeInsets.only(right: 15),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(5),
         boxShadow: [
           BoxShadow(
             color: AppColor.shadowColor.withOpacity(0.1),
@@ -28,7 +28,7 @@ class RecommendItem extends StatelessWidget {
         children: [
           CustomImage(
             data["image"],
-            radius: 20,
+            radius: 5,
             width: double.infinity,
             height: double.infinity,
           ),
@@ -48,7 +48,7 @@ class RecommendItem extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(5),
         gradient: LinearGradient(
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,

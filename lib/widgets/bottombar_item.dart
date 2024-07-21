@@ -9,6 +9,7 @@ class BottomBarItem extends StatelessWidget {
     this.activeColor = AppColor.primary,
     this.isActive = false,
     this.isNotified = false,
+    this.text = "",
   });
 
   final IconData icon;
@@ -16,6 +17,7 @@ class BottomBarItem extends StatelessWidget {
   final Color activeColor;
   final bool isNotified;
   final bool isActive;
+  final String text;
   final GestureTapCallback? onTap;
 
   @override
@@ -27,27 +29,31 @@ class BottomBarItem extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(7),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: isActive
-                    ? AppColor.primary.withOpacity(.1)
-                    : Colors.transparent,
-              ),
-              child: Icon(
-                icon,
-                size: 25,
-                color: isActive ? activeColor : color,
-              ),
-            ),
-            Positioned(
-              bottom: -8,
-              child: Icon(
-                Icons.arrow_drop_up,
-                size: 20.0,
-                color: isActive ? activeColor : Colors.transparent,
-              ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(7),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: isActive
+                        ? AppColor.primary.withOpacity(.1)
+                        : Colors.transparent,
+                  ),
+                  child: Icon(
+                    icon,
+                    size: 25,
+                    color: isActive ? activeColor : color,
+                  ),
+                ),
+                Text(
+                  text,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: isActive ? activeColor : color,
+                  ),
+                  )
+              ],
             ),
           ],
         ),

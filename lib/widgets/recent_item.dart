@@ -1,6 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:real_estate/theme/color.dart';
-
+import 'package:real_estate/widgets/webview_screen.dart';
 import 'custom_image.dart';
 
 class RecentItem extends StatelessWidget {
@@ -9,12 +11,12 @@ class RecentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 280,
+    Widget recentitem =  Container(
+      width: double.infinity,
       margin: EdgeInsets.only(right: 15),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(5),
         boxShadow: [
           BoxShadow(
             color: AppColor.shadowColor.withOpacity(0.1),
@@ -28,7 +30,10 @@ class RecentItem extends StatelessWidget {
         children: [
           CustomImage(
             data["image"],
-            radius: 20,
+            borderRadiusOnly: BorderRadius.only(
+              topLeft: Radius.circular(5),
+              bottomLeft: Radius.circular(5),
+            ),
           ),
           const SizedBox(
             width: 15,
@@ -39,6 +44,20 @@ class RecentItem extends StatelessWidget {
         ],
       ),
     );
+
+    recentitem = GestureDetector(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => WebViewScreen(url: data["URL"]),
+        ),
+      );
+    },
+    child: recentitem,
+  );
+
+    return recentitem;
   }
 
   Widget _buildInfo() {

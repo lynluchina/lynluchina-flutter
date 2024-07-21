@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:real_estate/pages/about_us.dart';
+import 'package:real_estate/pages/news.dart';
 import 'package:real_estate/pages/explore.dart';
 import 'package:real_estate/theme/color.dart';
 import 'package:real_estate/widgets/bottombar_item.dart';
-
 import 'home.dart';
 
 class RootApp extends StatefulWidget {
@@ -16,29 +17,28 @@ class _RootAppState extends State<RootApp> {
   int _activeTab = 0;
   final List _barItems = [
     {
-      "icon": Icons.home_outlined,
+      "icon": Icons.home_rounded,
       "active_icon": Icons.home_rounded,
       "page": HomePage(),
+      "text": "首页",
     },
     {
-      "icon": Icons.search_outlined,
+      "icon": Icons.search,
       "active_icon": Icons.search,
       "page": ExplorePage(),
+      "text": "曝盘",
     },
     {
-      "icon": Icons.favorite_border,
-      "active_icon": Icons.favorite_outlined,
-      "page": HomePage(),
+      "icon": Icons.newspaper_rounded,
+      "active_icon": Icons.newspaper_rounded,
+      "page": ArticleListPage(),
+      "text": "新闻",
     },
     {
-      "icon": Icons.forum_outlined,
-      "active_icon": Icons.forum_rounded,
-      "page": HomePage(),
-    },
-    {
-      "icon": Icons.settings_outlined,
-      "active_icon": Icons.settings_rounded,
-      "page": HomePage(),
+      "icon": Icons.info_outline_rounded,
+      "active_icon": Icons.info_outline_rounded,
+      "page": AboutUsPage(),
+      "text": "关于我们",
     },
   ];
 
@@ -46,59 +46,38 @@ class _RootAppState extends State<RootApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.appBgColor,
-      body: _buildPage(),
-      floatingActionButton: _buildBottomBar(),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterDocked,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return IndexedStack(
+            index: _activeTab,
+            children: List.generate(
+              _barItems.length,
+              (index) => SizedBox(
+                child: _barItems[index]["page"],
+              ),
+            ),
+          );
+        },
+      ),
+      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
-  Widget _buildPage() {
-    return IndexedStack(
-      index: _activeTab,
-      children: List.generate(
-        _barItems.length,
-        (index) => _barItems[index]["page"],
-      ),
-    );
-  }
-
-  Widget _buildBottomBar() {
-    return Container(
-      height: 55,
-      width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 15),
-      decoration: BoxDecoration(
-        color: AppColor.bottomBarColor,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: AppColor.shadowColor.withOpacity(0.1),
-            blurRadius: 1,
-            spreadRadius: 1,
-            offset: Offset(0, 1),
-          )
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: List.generate(
-          _barItems.length,
-          (index) => BottomBarItem(
-            _activeTab == index
-                ? _barItems[index]["active_icon"]
-                : _barItems[index]["icon"],
-            isActive: _activeTab == index,
-            activeColor: AppColor.primary,
-            onTap: () {
-              setState(() {
-                _activeTab = index;
-              });
-            },
-          ),
-        ),
-      ),
+  Widget _buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      currentIndex: _activeTab,
+      onTap: (index) {
+        setState(() {
+          _activeTab = index;
+        });
+      },
+      items: _barItems.map((item) => BottomNavigationBarItem(
+        icon: Icon(item["icon"]),
+        label: item["text"],
+      )).toList(),
+      backgroundColor: AppColor.bottomBarColor,
+      selectedItemColor: AppColor.primary,
+      unselectedItemColor: Colors.grey,
     );
   }
 }

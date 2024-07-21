@@ -4,6 +4,7 @@ import 'package:real_estate/theme/color.dart';
 class CustomImage extends StatelessWidget {
   const CustomImage(
     this.name, {
+    Key? key,
     this.width = 100,
     this.height = 100,
     this.bgColor,
@@ -12,7 +13,8 @@ class CustomImage extends StatelessWidget {
     this.trBackground = false,
     this.isNetwork = true,
     this.radius = 50,
-  });
+    this.borderRadiusOnly,
+  }) : super(key: key);
 
   final String name;
   final double width;
@@ -23,6 +25,7 @@ class CustomImage extends StatelessWidget {
   final bool trBackground;
   final bool isNetwork;
   final double radius;
+  final BorderRadius? borderRadiusOnly; // New property to support BorderRadius.only
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class CustomImage extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(radius),
+        borderRadius: borderRadiusOnly ?? BorderRadius.circular(radius), // Use provided borderRadiusOnly or circular radius
         boxShadow: [
           BoxShadow(
             color: AppColor.shadowColor.withOpacity(0.1),
@@ -41,7 +44,7 @@ class CustomImage extends StatelessWidget {
           ),
         ],
         image: DecorationImage(
-          image: NetworkImage(name),
+          image: isNetwork ? NetworkImage(name) : AssetImage(name) as ImageProvider,
           fit: BoxFit.cover,
         ),
       ),

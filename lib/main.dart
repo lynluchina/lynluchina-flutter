@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'pages/root.dart';
+import 'pages/splash_screen.dart';
 import 'theme/color.dart';
 
 void main() {
@@ -14,8 +15,15 @@ class MyApp extends StatelessWidget {
       title: 'Real Estate App',
       theme: ThemeData(
         primaryColor: AppColor.primary,
+        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: AppColor.primary),
+        highlightColor: AppColor.primary, // Change this to the color you want
+        splashColor: AppColor.primary, // Change this to the color you want
       ),
-      home: const RootApp(),
-    );
+      initialRoute: '/',
+      routes: {
+      '/': (context) => SplashScreen(),
+      '/home': (context) => RootApp(),
+    },
+  );
   }
 }
