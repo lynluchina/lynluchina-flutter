@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate/theme/color.dart';
-
+import 'package:real_estate/widgets/webview_screen.dart';
 import 'custom_image.dart';
 
 class RecommendItem extends StatelessWidget {
@@ -9,7 +9,7 @@ class RecommendItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    Widget recommendedItem = Container(
       width: 220,
       height: 130,
       margin: EdgeInsets.only(right: 15),
@@ -41,6 +41,20 @@ class RecommendItem extends StatelessWidget {
         ],
       ),
     );
+
+    recommendedItem = GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WebViewScreen(url: data["URL"]),
+          ),
+        );
+      },
+      child: recommendedItem,
+    );
+
+    return recommendedItem;
   }
 
   Widget _buildOverlay() {
