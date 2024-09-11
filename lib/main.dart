@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:real_estate/pages/alts/root_alt.dart';
 import 'pages/root.dart';
 import 'pages/splash_screen.dart';
 import 'theme/color.dart';

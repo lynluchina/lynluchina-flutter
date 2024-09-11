@@ -1,40 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate/pages/alts/REQuiz.dart';
-import 'package:real_estate/pages/about_us.dart';
 import 'package:real_estate/pages/alts/chatbot.dart';
-import 'package:real_estate/pages/news.dart';
-import 'package:real_estate/pages/explore.dart';
+import 'package:real_estate/pages/alts/home_alt.dart';
 import 'package:real_estate/theme/color.dart';
-import 'package:real_estate/widgets/bottombar_item.dart';
-import 'home.dart';
 
-class RootApp extends StatefulWidget {
-  const RootApp({Key? key}) : super(key: key);
+
+class RootAltApp extends StatefulWidget {
+  const RootAltApp({Key? key}) : super(key: key);
 
   @override
-  _RootAppState createState() => _RootAppState();
+  _RootAltAppState createState() => _RootAltAppState();
 }
 
-class _RootAppState extends State<RootApp> {
+class _RootAltAppState extends State<RootAltApp> {
   int _activeTab = 0;
   final List _barItems = [
     {
       "icon": Icons.home_rounded,
       "active_icon": Icons.home_rounded,
-      "page": HomePage(),
-      "text": "首页",
-    },
-    {
-      "icon": Icons.search,
-      "active_icon": Icons.search,
-      "page": ExplorePage(),
-      "text": "曝盘",
-    },
-    {
-      "icon": Icons.newspaper_rounded,
-      "active_icon": Icons.newspaper_rounded,
-      "page": ArticleListPage(),
-      "text": "新闻",
+      "page": HomeAlt(),
+      "text": "Home",
     },
     {
       "icon": Icons.chat_bubble,
@@ -43,10 +28,10 @@ class _RootAppState extends State<RootApp> {
       "text": "RE Chat",
     },
     {
-      "icon": Icons.info_outline_rounded,
-      "active_icon": Icons.info_outline_rounded,
-      "page": AboutUsPage(),
-      "text": "关于我们",
+      "icon": Icons.quiz,
+      "active_icon": Icons.quiz_outlined,
+      "page": REQuiz(),
+      "text": "Preferences",
     },
   ];
 
@@ -54,16 +39,13 @@ class _RootAppState extends State<RootApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.appBgColor,
-      // appBar: AppBar(
-      //
-      // ),
       body: LayoutBuilder(
         builder: (context, constraints) {
           return IndexedStack(
             index: _activeTab,
             children: List.generate(
               _barItems.length,
-              (index) => SizedBox(
+                  (index) => SizedBox(
                 child: _barItems[index]["page"],
               ),
             ),
